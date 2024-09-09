@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Proyectos - EVM Application{% endblock %}
+
+{% block content %}
+    <h2 class="h2">Lista de Proyectos</h2>
+    <a href="{% url 'project_create' %}" class="btn btn-primary mb-3">Nuevo Proyecto</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Costo Planificado</th>
+                <th>Costo Real</th>
+                <th>Valor Ganado</th>
+                <th>Fechas</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+            <tr>
+                <td>{{ project.name }}</td>
+                <td>${{ project.planned_cost }}</td>
+                <td>${{ project.actual_cost }}</td>
+                <td>${{ project.earned_value }}</td>
+                <td>{{ project.start_date }} - {{ project.end_date }}</td>
+                <td>
+                    <a href="{% url 'project_detail' project.pk %}" class="btn btn-info btn-sm">Ver</a>
+                    <a href="{% url 'project_edit' project.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{% url 'project_performance_chart' project.pk %}" class="btn btn-success btn-sm">Ver Gráfico</a>
+                    <a href="{% url 'export_project_pdf' project.pk %}" class="btn btn-danger btn-sm">Exportar PDF</a>
+                    <a href="{% url 'export_project_csv' project.pk %}" class="btn btn-secondary btn-sm">Exportar CSV</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No hay proyectos disponibles.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

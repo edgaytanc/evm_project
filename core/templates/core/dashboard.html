@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - EVM Application{% endblock %}
+
+{% block content %}
+    <h2 class="h2">Project Summary</h2>
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Projects</h5>
+                    <p class="card-text">{{ project_summary.total_projects }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Average CPI</h5>
+                    <p class="card-text">
+                        {% if project_summary.avg_cpi %}
+                            {{ project_summary.avg_cpi|floatformat:2 }}
+                        {% else %}
+                            Not Available
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-bg-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Average SPI</h5>
+                    <p class="card-text">
+                        {% if project_summary.avg_spi %}
+                            {{ project_summary.avg_spi|floatformat:2 }}
+                        {% else %}
+                            Not Available
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="h3">General Project Performance</h3>
+    <div class="chart-container mb-4">
+        <img src="data:image/png;base64,{{ project_summary.chart_uri }}" alt="Project Performance Chart">
+    </div>
+
+    <h3 class="h3">Actions</h3>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="{% url 'project_list' %}" class="btn btn-lg btn-outline-primary w-100 mb-3">
+                <span data-feather="file"></span> View Projects
+            </a>
+        </div>
+        {% comment %} <div class="col-md-4">
+            <a href="#" class="btn btn-lg btn-outline-secondary w-100 mb-3">
+                <span data-feather="bar-chart-2"></span> View EVM Metrics
+            </a>
+        </div> {% endcomment %}
+        <div class="col-md-4">
+            <a href="{% url 'export_all_projects_csv' %}" class="btn btn-lg btn-outline-success w-100 mb-3">
+                <span data-feather="download"></span> Exportar
+            </a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear Proyecto - EVM Application{% endblock %}
+
+{% block content %}
+    <h2 class="h2">Crear Proyecto</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Renderiza el formulario como párrafos (estilizado por Bootstrap) -->
+        <button type="submit" class="btn btn-primary">Guardar Proyecto</button>
+        <a href="{% url 'project_list' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}
+
