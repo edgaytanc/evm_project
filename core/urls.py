@@ -17,4 +17,5 @@ urlpatterns = [
     path('project/<int:pk>/export_pdf/', views.export_project_pdf, name='export_project_pdf'),
     path('project/<int:pk>/export_csv/', views.export_project_csv, name='export_project_csv'),
     path('projects/export_all_csv/', views.export_all_projects_csv, name='export_all_projects_csv'),
+    path('project/<int:pk>/delete/', views.project_delete, name='project_delete'),
 ]

@@ -3,7 +3,7 @@
 {% block title %}Dashboard - EVM Application{% endblock %}
 
 {% block content %}
-    <h2 class="h2">Project Summary</h2>
+    <h2 class="h2">Resumen de Proyectos</h2>
     <div class="row mb-4">
         <div class="col-md-4">
             <div class="card text-bg-primary mb-3">
@@ -43,26 +43,107 @@
         </div>
     </div>
 
-    <h3 class="h3">General Project Performance</h3>
-    <div class="chart-container mb-4">
-        <img src="data:image/png;base64,{{ project_summary.chart_uri }}" alt="Project Performance Chart">
+    <!-- New metrics section for CV, SV, CSI, and EAC -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-bg-danger mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Average CV (Cost Variance)</h5>
+                    <p class="card-text">
+                        {% if project_summary.avg_cv %}
+                            ${{ project_summary.avg_cv|floatformat:2 }}
+                        {% else %}
+                            Not Available
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-bg-secondary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Average SV (Schedule Variance)</h5>
+                    <p class="card-text">
+                        {% if project_summary.avg_sv %}
+                            ${{ project_summary.avg_sv|floatformat:2 }}
+                        {% else %}
+                            Not Available
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Average CSI (Cost Schedule Index)</h5>
+                    <p class="card-text">
+                        {% if project_summary.avg_csi %}
+                            {{ project_summary.avg_csi|floatformat:2 }}
+                        {% else %}
+                            Not Available
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <h3 class="h3">Actions</h3>
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-bg-light mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Average EAC (Estimate at Completion)</h5>
+                    <p class="card-text">
+                        {% if project_summary.avg_eac %}
+                            ${{ project_summary.avg_eac|floatformat:2 }}
+                        {% else %}
+                            Not Available
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% comment %} <h3 class="h3">General Project Performance</h3>
+    <div class="chart-container mb-4">
+        <img src="data:image/png;base64,{{ project_summary.chart_uri }}" alt="Project Performance Chart">
+    </div> {% endcomment %}
+
+    <!-- New charts for ETC, EAC, CV, SV, CPI, SPI, CR -->
+    <h3 class="h3">Gráficos de rendimiento métrico</h3>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h4 class="h4">ETC and EAC</h4>
+            <img src="data:image/png;base64,{{ project_summary.etc_eac_chart_uri }}" alt="ETC and EAC Chart" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <h4 class="h4">CV and SV</h4>
+            <img src="data:image/png;base64,{{ project_summary.cv_sv_chart_uri }}" alt="CV and SV Chart" class="img-fluid">
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h4 class="h4">CPI, SPI and CR</h4>
+            <img src="data:image/png;base64,{{ project_summary.cpi_spi_cr_chart_uri }}" alt="CPI, SPI and CR Chart" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <h4 class="h4">PV, AC and EV</h4>
+            <img src="data:image/png;base64,{{ project_summary.pv_ac_ev_chart_uri }}" alt="PV, AC and EV Chart" class="img-fluid">
+        </div>
+    </div>
+
+    <h3 class="h3">Acciones</h3>
     <div class="row">
         <div class="col-md-4">
             <a href="{% url 'project_list' %}" class="btn btn-lg btn-outline-primary w-100 mb-3">
-                <span data-feather="file"></span> View Projects
+                <span data-feather="file"></span> Ver Proyectos
             </a>
         </div>
-        {% comment %} <div class="col-md-4">
-            <a href="#" class="btn btn-lg btn-outline-secondary w-100 mb-3">
-                <span data-feather="bar-chart-2"></span> View EVM Metrics
-            </a>
-        </div> {% endcomment %}
         <div class="col-md-4">
             <a href="{% url 'export_all_projects_csv' %}" class="btn btn-lg btn-outline-success w-100 mb-3">
-                <span data-feather="download"></span> Exportar
+                <span data-feather="download"></span> Exportar Proyectos
             </a>
         </div>
     </div>

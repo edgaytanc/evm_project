@@ -49,6 +49,56 @@
                 {% endif %}
             </td>
         </tr>
+        <tr>
+            <th>CV (Cost Variance):</th>
+            <td>
+                {% if cv %}
+                    ${{ cv|floatformat:2 }}
+                {% else %}
+                    No disponible
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>SV (Schedule Variance):</th>
+            <td>
+                {% if sv %}
+                    ${{ sv|floatformat:2 }}
+                {% else %}
+                    No disponible
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>CSI (Cost Schedule Index):</th>
+            <td>
+                {% if csi %}
+                    {{ csi|floatformat:2 }}
+                {% else %}
+                    No disponible
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>ETC (Estimate to Complete):</th>
+            <td>
+                {% if etc %}
+                    ${{ etc|floatformat:2 }}
+                {% else %}
+                    No disponible
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>EAC (Estimate at Completion):</th>
+            <td>
+                {% if eac %}
+                    ${{ eac|floatformat:2 }}
+                {% else %}
+                    No disponible
+                {% endif %}
+            </td>
+        </tr>
     </table>
     <a href="{% url 'project_edit' project.pk %}" class="btn btn-warning">Editar Proyecto</a>
     <a href="{% url 'project_list' %}" class="btn btn-secondary">Volver a la Lista</a>

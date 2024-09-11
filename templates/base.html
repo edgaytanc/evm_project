@@ -143,6 +143,14 @@
 
                 <!-- Aquí irá el contenido dinámico que cada página cargará -->
                 {% block content %}
+                    <!-- Aquí se muestran los mensajes de feedback -->
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li class="alert alert-{{ message.tags }}">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                 {% endblock %}
 
             </main>

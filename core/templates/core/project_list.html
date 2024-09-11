@@ -30,6 +30,7 @@
                     <a href="{% url 'project_performance_chart' project.pk %}" class="btn btn-success btn-sm">Ver Gráfico</a>
                     <a href="{% url 'export_project_pdf' project.pk %}" class="btn btn-danger btn-sm">Exportar PDF</a>
                     <a href="{% url 'export_project_csv' project.pk %}" class="btn btn-secondary btn-sm">Exportar CSV</a>
+                    <a href="{% url 'project_delete' project.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             {% empty %}

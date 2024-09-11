@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Proyecto - EVM Application{% endblock %}
+
+{% block content %}
+    <h2 class="h2">Eliminar Proyecto</h2>
+    <p>¿Estás seguro de que quieres eliminar el proyecto "{{ project.name }}"?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <a href="{% url 'project_list' %}" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+    </form>
+{% endblock %}
